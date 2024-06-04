@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import HomePage from "./pages/HomePage";
+import CallbackPage from "./pages/CallbackPage";
+import "./styles/App.css";
 
-function App() {
+const App = () => {
+  const accessToken = localStorage.getItem("accessToken");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="root">
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/home" element={<HomePage accessToken={accessToken} />} />
+        {/* <Route path="/auth/callback/github" element={<CallbackPage />} /> */}
+        {/* <Route path="/auth/callback/twitter" element={<CallbackPage />} /> */}
+        <Route path="/auth/callback/discord" element={<CallbackPage />} />
+        <Route path="/auth/callback/google" element={<CallbackPage />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
